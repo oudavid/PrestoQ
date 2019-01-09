@@ -10,7 +10,7 @@ import retrofit2.Response
 import java.lang.Exception
 
 class ManagerSpecialsViewModel: ViewModel() {
-    private val TAG = ManagerSpecialsViewModel::class.java.simpleName
+    private val tag: String = ManagerSpecialsViewModel::class.java.simpleName
     private val managerSpecials = MutableLiveData<ManagerSpecialsResponse>()
     private val errors = MutableLiveData<Throwable>()
     private val service: ManagerSpecialsService = ManagerSpecialsService.create()
@@ -18,7 +18,7 @@ class ManagerSpecialsViewModel: ViewModel() {
     fun getManagerSpecials(): LiveData<ManagerSpecialsResponse> {
         service.getManagerSpecials().enqueue(object: Callback<ManagerSpecialsResponse> {
             override fun onFailure(call: Call<ManagerSpecialsResponse>, t: Throwable) {
-                Log.e(TAG, t.toString())
+                Log.e(tag, t.toString())
                 errors.value = t
             }
 

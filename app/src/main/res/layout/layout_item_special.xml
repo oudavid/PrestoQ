@@ -1,0 +1,84 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<androidx.cardview.widget.CardView
+        xmlns:app="http://schemas.android.com/apk/res-auto"
+        xmlns:android="http://schemas.android.com/apk/res/android"
+        xmlns:tools="http://schemas.android.com/tools"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="8dp"
+        android:layout_marginRight="8dp"
+        android:layout_marginBottom="4dp"
+        android:layout_marginTop="4dp"
+        app:cardCornerRadius="8dp">
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+
+        <ImageView
+                android:id="@+id/image"
+                android:layout_width="100dp"
+                android:layout_height="100dp"
+                android:layout_marginTop="16dp"
+                android:layout_marginLeft="16dp"
+                app:layout_constraintTop_toTopOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                tools:src="@color/colorPrimary"/>
+
+        <TextView
+                android:id="@+id/original_price"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginEnd="16dp"
+                android:layout_marginRight="8dp"
+                android:layout_marginTop="16dp"
+                android:textSize="30dp"
+                app:layout_constraintHorizontal_bias="1"
+                app:layout_constraintTop_toTopOf="@+id/image"
+                app:layout_constraintEnd_toEndOf="parent"
+                tools:text="$1.00" app:layout_constraintStart_toStartOf="@+id/guideline" android:layout_marginLeft="8dp"
+                android:layout_marginStart="8dp"/>
+
+        <TextView
+                android:id="@+id/price"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textSize="30dp"
+                android:textColor="@color/colorPrice"
+                tools:text="$1.00"
+                android:layout_marginTop="4dp"
+                app:layout_constraintStart_toStartOf="@+id/original_price"
+                app:layout_constraintEnd_toEndOf="@+id/original_price"
+                app:layout_constraintTop_toBottomOf="@+id/original_price"/>
+
+        <TextView
+                android:id="@+id/display_name"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:maxWidth="200dp"
+                android:textAlignment="center"
+                android:textSize="16dp"
+                android:textStyle="bold"
+                tools:text="Noodle Dish with Roasted Black Bean Sauce"
+                app:layout_constraintEnd_toEndOf="parent"
+                android:layout_marginEnd="8dp"
+                app:layout_constraintStart_toStartOf="parent"
+                android:layout_marginStart="8dp"
+                app:layout_constraintTop_toBottomOf="@+id/image"
+                android:layout_marginTop="16dp"
+                android:layout_marginBottom="8dp"
+                app:layout_constraintBottom_toBottomOf="parent"/>
+
+        <androidx.constraintlayout.widget.Guideline
+                android:orientation="vertical"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                app:layout_constraintGuide_begin="112dp"
+                android:id="@+id/guideline"/>
+
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+
+</androidx.cardview.widget.CardView>
+
