@@ -11,8 +11,8 @@ import androidx.recyclerview.widget.RecyclerView
 import kotlinx.android.synthetic.main.activity_main.*
 
 
-class MainActivity : AppCompatActivity() {
-    private val tag: String = MainActivity::class.java.simpleName
+class ManagerSpecialActivity : AppCompatActivity() {
+    private val tag: String = ManagerSpecialActivity::class.java.simpleName
 
     private lateinit var viewModel: ManagerSpecialsViewModel
 
@@ -26,7 +26,7 @@ class MainActivity : AppCompatActivity() {
         adapter = ManagerSpecialAdapter()
         manager_specials_rv.let {
             it.adapter = adapter
-            it.layoutManager = LinearLayoutManager(this@MainActivity, RecyclerView.VERTICAL, false)
+            it.layoutManager = LinearLayoutManager(this@ManagerSpecialActivity, RecyclerView.VERTICAL, false)
             it.setHasFixedSize(true)
         }
     }
@@ -42,7 +42,7 @@ class MainActivity : AppCompatActivity() {
         viewModel.listenForErrors().observe(this, Observer {
             when (it) {
                 is NetworkException -> Toast.makeText(this, it.toString(), Toast.LENGTH_SHORT).show()
-                else -> Toast.makeText(this, "Server cannot be reached. Please check your internet connection.", Toast.LENGTH_SHORT).show()
+                else -> Toast.makeText(this, R.string.no_network_connectivity_error_msg, Toast.LENGTH_SHORT).show()
             }
         })
     }
