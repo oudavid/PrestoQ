@@ -8,16 +8,35 @@ import android.widget.ImageView
 import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
 import com.bumptech.glide.Glide
+import java.lang.IllegalArgumentException
 
-class ManagerSpecialAdapter(private var specials: List<ManagerSpecial> = emptyList()): RecyclerView.Adapter<ManagerSpecialViewHolder>() {
+class ManagerSpecialAdapter(
+    private var specials: List<ManagerSpecial> = emptyList(),
+    private var displayWidth: Int
+): RecyclerView.Adapter<ManagerSpecialViewHolder>() {
+
+    var canvasUnits: Int = 16
+
+    companion object LayoutParamsUtil {
+        fun getHeight(displayWidth: Int, itemHeight: Int, canvasUnits: Int, layoutParams: ViewGroup.MarginLayoutParams): Int {
+            return (displayWidth * itemHeight / canvasUnits) - layoutParams.topMargin - layoutParams.bottomMargin
+        }
+
+        fun getWidth(displayWidth: Int, itemWidth: Int, canvasUnits: Int, layoutParams: ViewGroup.MarginLayoutParams): Int {
+            if (itemWidth > canvasUnits) throw IllegalArgumentException("Item width must be less than or equal to canvas units!")
+            return (displayWidth * itemWidth / canvasUnits) - layoutParams.leftMargin - layoutParams.rightMargin
+        }
+    }
 
     override fun getItemCount(): Int {
         return specials.size
     }
 
     override fun onBindViewHolder(holder: ManagerSpecialViewHolder, position: Int) {
-
         val special = specials[position]
+        val layoutParams = holder.itemView.layoutParams
+        layoutParams.height = getHeight(displayWidth, special.height, canvasUnits, layoutParams as ViewGroup.MarginLayoutParams)
+        layoutParams.width = getWidth(displayWidth, special.width, canvasUnits, layoutParams)
 
         holder.originalPrice.text = String.format("$%s", special.original_price)
         holder.originalPrice.paintFlags = holder.originalPrice.paintFlags or Paint.STRIKE_THRU_TEXT_FLAG
