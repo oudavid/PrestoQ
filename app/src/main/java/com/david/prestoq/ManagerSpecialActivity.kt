@@ -1,13 +1,16 @@
 package com.david.prestoq
 
 import android.os.Bundle
+import android.util.DisplayMetrics
 import android.util.Log
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProviders
-import androidx.recyclerview.widget.LinearLayoutManager
-import androidx.recyclerview.widget.RecyclerView
+import com.google.android.flexbox.AlignItems
+import com.google.android.flexbox.FlexDirection
+import com.google.android.flexbox.FlexWrap
+import com.google.android.flexbox.FlexboxLayoutManager
 import kotlinx.android.synthetic.main.activity_main.*
 
 
@@ -15,7 +18,6 @@ class ManagerSpecialActivity : AppCompatActivity() {
     private val tag: String = ManagerSpecialActivity::class.java.simpleName
 
     private lateinit var viewModel: ManagerSpecialsViewModel
-
     private lateinit var adapter: ManagerSpecialAdapter
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -23,10 +25,18 @@ class ManagerSpecialActivity : AppCompatActivity() {
         setContentView(R.layout.activity_main)
         supportActionBar?.hide()
 
-        adapter = ManagerSpecialAdapter()
+        val metrics = DisplayMetrics()
+        windowManager.defaultDisplay.getMetrics(metrics)
+        Log.d(tag, "height: ${metrics.heightPixels} width: ${metrics.widthPixels}")
+
+        adapter = ManagerSpecialAdapter(displayWidth = metrics.widthPixels)
         manager_specials_rv.let {
             it.adapter = adapter
-            it.layoutManager = LinearLayoutManager(this@ManagerSpecialActivity, RecyclerView.VERTICAL, false)
+            val layoutManager = FlexboxLayoutManager(this@ManagerSpecialActivity)
+            layoutManager.flexDirection = FlexDirection.ROW
+            layoutManager.flexWrap = FlexWrap.WRAP
+            layoutManager.alignItems = AlignItems.FLEX_START
+            it.layoutManager = layoutManager
             it.setHasFixedSize(true)
         }
     }
@@ -38,6 +48,7 @@ class ManagerSpecialActivity : AppCompatActivity() {
         viewModel.getManagerSpecials().observe(this, Observer {
             Log.d(tag, it.toString())
             adapter.updateSpecials(it.managerSpecials)
+            adapter.canvasUnits = it.canvasUnit
         })
         viewModel.listenForErrors().observe(this, Observer {
             when (it) {
