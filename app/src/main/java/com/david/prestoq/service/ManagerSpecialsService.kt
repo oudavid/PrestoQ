@@ -1,5 +1,6 @@
-package com.david.prestoq
+package com.david.prestoq.service
 
+import com.david.prestoq.data.ManagerSpecialsResponse
 import retrofit2.Call
 import retrofit2.Retrofit
 import retrofit2.converter.gson.GsonConverterFactory

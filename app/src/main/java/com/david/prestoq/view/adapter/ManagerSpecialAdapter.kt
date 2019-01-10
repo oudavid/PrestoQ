@@ -1,4 +1,4 @@
-package com.david.prestoq
+package com.david.prestoq.view.adapter
 
 import android.graphics.Paint
 import android.view.LayoutInflater
@@ -8,6 +8,8 @@ import android.widget.ImageView
 import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
 import com.bumptech.glide.Glide
+import com.david.prestoq.R
+import com.david.prestoq.data.ManagerSpecial
 import java.lang.IllegalArgumentException
 
 class ManagerSpecialAdapter(
@@ -15,8 +17,10 @@ class ManagerSpecialAdapter(
     private var displayWidth: Int
 ): RecyclerView.Adapter<ManagerSpecialViewHolder>() {
 
+    // Default max canvas units
     var canvasUnits: Int = 16
 
+    // Util class to calculate adjusted item view widths and heights
     companion object LayoutParamsUtil {
         fun getHeight(displayWidth: Int, itemHeight: Int, canvasUnits: Int, layoutParams: ViewGroup.MarginLayoutParams): Int {
             return (displayWidth * itemHeight / canvasUnits) - layoutParams.topMargin - layoutParams.bottomMargin
@@ -35,8 +39,18 @@ class ManagerSpecialAdapter(
     override fun onBindViewHolder(holder: ManagerSpecialViewHolder, position: Int) {
         val special = specials[position]
         val layoutParams = holder.itemView.layoutParams
-        layoutParams.height = getHeight(displayWidth, special.height, canvasUnits, layoutParams as ViewGroup.MarginLayoutParams)
-        layoutParams.width = getWidth(displayWidth, special.width, canvasUnits, layoutParams)
+        layoutParams.height = getHeight(
+            displayWidth,
+            special.height,
+            canvasUnits,
+            layoutParams as ViewGroup.MarginLayoutParams
+        )
+        layoutParams.width = getWidth(
+            displayWidth,
+            special.width,
+            canvasUnits,
+            layoutParams
+        )
 
         holder.originalPrice.text = String.format("$%s", special.original_price)
         holder.originalPrice.paintFlags = holder.originalPrice.paintFlags or Paint.STRIKE_THRU_TEXT_FLAG
