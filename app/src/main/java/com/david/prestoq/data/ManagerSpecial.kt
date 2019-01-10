@@ -1,4 +1,4 @@
-package com.david.prestoq
+package com.david.prestoq.data
 
 data class ManagerSpecialsResponse(
     val canvasUnit: Int,

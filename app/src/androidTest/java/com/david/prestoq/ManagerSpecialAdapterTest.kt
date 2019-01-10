@@ -1,6 +1,7 @@
 package com.david.prestoq
 
 import android.view.ViewGroup
+import com.david.prestoq.view.adapter.ManagerSpecialAdapter
 import org.junit.Assert
 import org.junit.Test
 import java.lang.IllegalArgumentException
