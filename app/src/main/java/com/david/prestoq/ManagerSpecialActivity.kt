@@ -7,10 +7,7 @@ import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProviders
-import com.google.android.flexbox.AlignItems
-import com.google.android.flexbox.FlexDirection
-import com.google.android.flexbox.FlexWrap
-import com.google.android.flexbox.FlexboxLayoutManager
+import com.google.android.flexbox.*
 import kotlinx.android.synthetic.main.activity_main.*
 
 
@@ -36,6 +33,7 @@ class ManagerSpecialActivity : AppCompatActivity() {
             layoutManager.flexDirection = FlexDirection.ROW
             layoutManager.flexWrap = FlexWrap.WRAP
             layoutManager.alignItems = AlignItems.FLEX_START
+            layoutManager.justifyContent = JustifyContent.CENTER
             it.layoutManager = layoutManager
             it.setHasFixedSize(true)
         }
